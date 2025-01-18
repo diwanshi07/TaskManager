@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="form-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit" class="btn">Login</button>
+        <p>Don't have an account? <a href="#" id="signup-link">Sign up</a></p>
+    </form>
+
+    <div id="flash-messages"></div>
+</section>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();  
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        fetch('/api/v1/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                localStorage.setItem('authToken', data.token);
+
+                document.getElementById('flash-messages').innerHTML = `<p class="flash success">${data.message}</p>`;
+
+                console.log("Redirecting")
+                window.location.replace('/tasks'); 
+            } else {
+                document.getElementById('flash-messages').innerHTML = `<p class="flash error">${data.message}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error during login:', error);
+            document.getElementById('flash-messages').innerHTML = `<p class="flash error">Something went wrong. Please try again.</p>`;
+        });
+    });
+
+    document.getElementById('signup-link').addEventListener('click', function(event) {
+        event.preventDefault();  
+        window.location.replace('/signup');  
+    });
+</script>
+{% endblock %}

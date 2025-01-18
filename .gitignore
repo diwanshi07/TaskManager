@@ -1,0 +1,45 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+
+# Virtual Environment
+venv/
+env/
+
+# Python distribution package
+*.tar.gz
+*.whl
+*.dist-info/
+*.eggs/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Environment Variables
+.env
+
+# Flask related
+instance/
+
+# Logs
+*.log
+
+# SQLite database
+*.sqlite3
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
