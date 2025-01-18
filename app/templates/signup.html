@@ -39,17 +39,15 @@
             })
         }).
         then(response => {
-            console.log("Came here==+1", JSON.stringify(response), 1)
             if (!response.ok) {
                 return response.json().then(data => {
                     throw new Error(data.message || 'Something went wrong');
                 });
             }
-            console.log("Came here==+")
             return response.json();
         })
         .then(data => {
-            if (data.status === 'success') {
+            if (data.success === true) {
                 document.getElementById('flash-messages').innerHTML = `<p class="flash success">${data.message}</p>`;
                 
                 window.location.href = '/login';  

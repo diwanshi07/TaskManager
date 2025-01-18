@@ -17,7 +17,7 @@ class User(db.Model):
 
     def __init__(self, username, password):
         self.username = username
-        self.password = generate_password_hash(password)
+        self.password = password
     
     def to_dict(self):
         """Convert the User object to a dictionary."""

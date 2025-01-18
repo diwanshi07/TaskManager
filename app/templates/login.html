@@ -38,7 +38,6 @@
 
                 document.getElementById('flash-messages').innerHTML = `<p class="flash success">${data.message}</p>`;
 
-                console.log("Redirecting")
                 window.location.replace('/tasks'); 
             } else {
                 document.getElementById('flash-messages').innerHTML = `<p class="flash error">${data.message}</p>`;
